@@ -1,0 +1,122 @@
+<?php
+
+// Demo of Sidora Analysis API for Islandora
+// file: sianisdemo.module
+// author: Gert Schmeltz Pedersen gertsp45@gmail.com
+
+	function sianisdemo_init() {
+//    drupal_set_message(t('sianisdemo_init'));
+		drupal_add_css(drupal_get_path('module', 'sianisdemo').'/sianisdemo.css');
+		drupal_add_js(drupal_get_path('module', 'sianisdemo').'/sianisdemo.js');
+	}
+   
+	function sianisdemo_perm() {
+		return array('Demo of Sidora Analysis API for Islandora', 'Administer sianisdemo');
+	}
+   
+
+	function sianisdemo_menu() {
+		$items = array();
+		$items['sianisdemo'] = array(
+			'page callback' => 'sianisdemo',
+			'access arguments' => array('Demo of Sidora Analysis API for Islandora'),
+			'type' => MENU_CALLBACK,
+		);
+		$items['admin/settings/sianisdemo'] = array(
+			'title' => 'sianisdemo Settings',
+			'description' => 'sianisdemo Settings',
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('sianisdemo_settings'),
+			'access arguments' => array('Administer sianisdemo'),
+		);
+		return $items;
+	}
+
+	function sianisdemo_block($op = 'list', $delta = 0, $edit = array()) {
+		switch ($op) {
+			case 'list':
+				$blocks[0] = array(
+				'info' => t('sianisdemo Block'),
+				);
+				return $blocks;
+			case 'configure':
+				$form = array();
+				switch ($delta) {
+					case 0:
+						$form['sianisdemo_block_sianis']=array(
+							'#type' => 'textfield',
+							'#title' => t('The url of sianis'),
+							'#size' => 75,
+							'#description' => t('The url of sianis.'),
+							'#default_value' => variable_get('sianisdemo_block_sianis', t('http://127.0.0.1:8082/sianis')),
+						);
+						$form['sianisdemo_block_sianis_userpass']=array(
+							'#type' => 'textfield',
+							'#title' => t('The username:password at sianis'),
+							'#size' => 75,
+							'#description' => t('The username:password at sianis.'),
+							'#default_value' => variable_get('sianisdemo_block_sianis_userpass', t('sianisdemouserofsianis:sianisdemouserofsianispassword')),
+						);
+						break;
+				}
+				return $form;
+			case 'save':
+				switch ($delta) {
+					case 0:
+						variable_set('sianisdemo_block_sianis', $edit['sianisdemo_block_sianis']);
+						variable_set('sianisdemo_block_sianis_userpass', $edit['sianisdemo_block_sianis_userpass']);
+						break;
+				}
+			case 'view': default:
+				case 0:
+					$block['subject'] = t('Sidora Analysis API for Islandora demo block');
+					$block['content'] = sianisdemo_get_block();
+					break;
+		}
+		return $block;
+	}
+
+	function sianisdemo_theme() {
+		return array(
+			'sianisdemo_block_form' => array(
+				'arguments' => array (
+				'form' => NULL,
+				),
+			),
+		);
+	}
+
+	function sianisdemo_get_block() {
+		global $user;
+	 	$datestamp = date('Y-m-d H:i:s');
+ 		$logdatestamp = date('Y-m-d');
+		$logfp = fopen('/tmp/sianisdemo-' . $logdatestamp . '.log', 'a');
+		fwrite($logfp, "\n\n[$datestamp] $user->name sianisdemoBlock.html");
+		fclose($logfp);
+		return file_get_contents(drupal_get_path('module', 'sianisdemo') . '/sianisdemoBlock.html');
+	}
+
+	function sianisdemo($op, $arg1=null, $arg2=null, $arg3=null, $arg4=null, $arg5=null, $arg6=null, $arg7=null, $arg8=null, $arg9=null) {
+		module_load_include('inc', 'sianisdemo', 'SIANISDEMO');
+		$sianisdemoClass = new SIANISDEMO();
+		if ($op == 'sianisdemoGetFile') {
+			$workflowResult = $sianisdemoClass->sianisdemoGetFile($arg1);
+			return $workflowResult;
+		}
+		if ($op == 'sianisdemoGetProjectStructure') {
+			$workflowResult = $sianisdemoClass->sianisdemoGetProjectStructure($arg1);
+			return $workflowResult;
+		}
+		if ($op == 'sianisdemoGetSpecies') {
+			$workflowResult = $sianisdemoClass->sianisdemoGetSpecies($arg1, $arg2);
+			return $workflowResult;
+		}
+		if ($op == 'sianisdemoSelectObstables') {
+			$workflowResult = $sianisdemoClass->sianisdemoSelectObstables($arg1, $arg2, $arg3, $arg4, $arg5, $arg6, $arg7, $arg8, $arg9);
+			return $workflowResult;
+		}
+	}
+
+	function sianisdemo_settings() { 
+		return system_settings_form($form); 
+	}

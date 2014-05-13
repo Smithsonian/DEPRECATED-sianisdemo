@@ -1,0 +1,9 @@
+// Demo of Sidora Analysis API for Islandora
+// file: sianisdemo.info
+// author: Gert Schmeltz Pedersen gertsp45@gmail.com
+
+name = sianisdemo
+description = Demo of Sidora Analysis API for Islandora
+package = sianisdemo
+version = 6.1dev
+core = 6.x

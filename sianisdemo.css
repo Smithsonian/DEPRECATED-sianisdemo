@@ -1,0 +1,207 @@
+/* Demo of Sidora Analysis for Islandora
+   file: sianisdemo.css
+   author: Gert Schmeltz Pedersen gertsp45@gmail.com
+*/
+
+	#sianisdemoMainArea {
+		float: left;
+		width: 95%;
+		padding: 0px;
+		margin: 0px;
+		background-color: #eeeeff;
+	}
+	
+	#sianisdemoLeftColumnArea {
+		float: left;
+		width: 45%;
+		background-color: #eeee11;
+		padding: 0px;
+		margin: 0px;
+	}
+	
+	#sianisdemoRightColumnArea {
+		float: right;
+		width: 55%;
+		background-color: #eeeeff;
+		padding: 0px;
+		margin: 0px;
+	}
+	
+	#sianisdemoSelectionsArea {
+		width: 100%;
+		padding: 0px;
+		margin: 0px;
+	}
+	
+	#sianisdemoMapArea {
+		width: 100%;
+		padding: 0px;
+		margin: 0px;
+	}
+	
+	#sianisdemoSelectGeo {
+		width: 97%;
+		height: 180px;
+		padding: 0px;
+		margin: 5px;
+		background-color: #eedd99;
+	}
+	
+	#sianisdemoProjectStructureArea {
+		width: 97%;
+		color: black;
+		background-color: #eedd99;
+		font-size: 100%;
+		font-style: normal;
+		padding: 0px;
+		margin: 5px 5px 50px 5px;
+	}
+	
+	#sianisdemoStatusDiv {
+		width: 100%;
+		padding: 0px;
+		margin: 0px;
+		background-color: #eeeeff;
+		clear: both;
+	}
+	
+	#sianisdemoStatusArea {
+		width: 90%;
+		color: black;
+		font-size: 80%;
+		font-style: normal;
+		padding: 0px 0px 20px 20px;
+		margin: 0px;
+	}
+	
+	#sianisdemoDescriptionArea {
+		width: 95%;
+		color: black;
+		background-color: #eeeedd;
+		font-size: 80%;
+		font-style: normal;
+		padding: 20px;
+		margin: 0px;
+		clear: both;
+	}
+	
+	#sianisdemoBottomArea {
+		width: 95%;
+		color: black;
+		background-color: #eeeedd;
+		font-size: 80%;
+		font-style: normal;
+		padding: 0px;
+		margin: 0px;
+		clear: both;
+	}
+	
+	.sianisdemoProjectItem {
+		color: blue;
+		font-size: 100%;
+		font-weight: bold;
+		padding: 0px;
+		margin: 0px 0px 0px 0px;
+	}
+	
+	.sianisdemoParkItem {
+		color: red;
+		font-size: 95%;
+		font-style: italic;
+		padding: 0px;
+		margin: 0px 0px 0px 10px;
+	}
+	
+	.sianisdemoSiteItem {
+		color: brown;
+		font-size: 90%;
+		font-style: italic;
+		padding: 0px;
+		margin: 0px 0px 0px 20px;
+	}
+	
+	.sianisdemoCameratrapItem {
+		color: black;
+		font-size: 85%;
+		font-style: italic;
+		padding: 0px;
+		margin: 0px 0px 0px 30px;
+	}
+	
+	.sianisdemoObstableItem {
+		color: green;
+		font-size: 80%;
+		font-style: normal;
+		padding: 0px;
+		margin: 0px 0px 0px 40px;
+	}
+	
+	.sianisdemoHeader {
+		clear: both;
+		color: blue;
+		font-size: 150%;
+		font-weight: bold;
+		padding: 15px;
+		margin: 10px 10px 10px 10px;
+	}
+	
+	.sianisdemoLabel {
+		color: brown;
+		font-size: 90%;
+		font-weight: bold;
+		padding: 0px;
+		margin: 5px 5px 8px 10px;
+	}
+	
+	.sianisdemoSubLabel {
+		color: brown;
+		font-size: 80%;
+		font-style: normal;
+		padding: 0px;
+		margin: 3px 0px 3px 30px;
+	}
+	
+	.sianisdemoSelect {
+		padding: 0px;
+		margin: 5px 0px 5px 32px;
+	}
+	
+	#sianisdemoBoundingBoxTable {
+		width: 90%; 
+		float: right; 
+		border: 1px solid black; 
+		margin: 3px 3px 3px 3px;
+		color: brown;
+		font-size: 80%;
+		font-style: italic;
+		background-color: #eedd99;
+	}
+	
+	#sianisdemoBeginEnd {
+		width: 70%; 
+		float: right; 
+		border: 1px solid black; 
+		margin: 3px 15px 3px 3px;
+		color: brown;
+		font-size: 100%;
+		font-style: italic;
+	}
+	
+	#sianisdemoResultButton {
+		color: brown;
+		font-size: 120%;
+		font-weight: bold;
+		padding: 50px;
+		margin: 0px 0px 0px 25px;
+	}
+	
+	#sianisdemoButtons {
+		clear: both;
+		float: right; 
+		margin: 5px 25px 5px 25px;
+		background-color: #eedd99;
+	}
+	
+	#sianisdemoSelectSpecies {
+		clear: both;
+	}

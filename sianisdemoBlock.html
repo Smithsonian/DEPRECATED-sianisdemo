@@ -1,0 +1,148 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="sianisdemo.css" type="text/css">
+  <script src="sianisdemo.js" language="javascript"></script>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <script type="text/javascript" 
+    src="http://maps.googleapis.com/maps/api/js?key=AIzaSyB0Qak0d1SaixcO0nOFSRWrXhLx_2D_AvM&amp;sensor=false&amp;libraries=drawing">
+  </script>
+</head>
+<body onload="javascript:sianisdemoOnload();">
+  <div id="sianisdemoMainArea">
+    <!-- <div class="sianisdemoHeader">Demo of Sidora Analysis API for Islandora</div> -->
+	<div id="sianisdemoLeftColumnArea">
+		<div id="sianisdemoSelectionsArea">
+			<form>
+				<div>
+					<span class="sianisdemoLabel">Select workflow</span>
+					<div id="sianisdemoWorkflowSelectDiv">
+					</div>
+				</div>
+				<div>
+					<span style="width:100%">
+						<span class="sianisdemoSubLabel" style="float:right">After your selections below, click on
+							<input id="sianisdemoRunWorkflowButton" type="button" value="Run the Workflow" onclick="javascript:sianisdemoRun();" title="run the workflow" disabled/>
+						</span>
+					</span>
+				</div>
+				<div id="sianisdemoSelectSpecies" style="">
+					<span class="sianisdemoLabel">Select species name</span>&#160;&#160;&#160;
+					<input id="sianisdemoGetSpeciesButton" type="button" value="Get names" onclick="javascript:sianisdemoGetSpecies();" title="Get species names from the selected observation tables" disabled/>
+					<div>
+						<select id="sianisdemoSpecies" name="species_name" size="1" class="sianisdemoSelect" disabled onclick="javascript:sianisdemoSpeciesSelected(this);">
+							<option value=" ">
+								0 names from 0 observations
+							</option>
+						</select>
+					</div>
+				</div>
+				<div class="sianisdemoLabel" style="clear:both">Select observation tables</div>
+				<div class="sianisdemoSubLabel" style="clear:both">
+					You have selected <span id="sianisdemoSelectedObstablesCount">0</span> out of <span id="sianisdemoObstablesCount">0</span> observation tables.&#160;&#160;
+					<input id="sianisdemoClearButton" type="button" value="Clear" onclick="javascript:sianisdemoClear();" title="clear the selection" disabled>
+				</div>
+				<div style="clear:both">
+					<span class="sianisdemoSubLabel">
+						Filter:
+					</span>
+					<span class="sianisdemoSubLabel">
+						<input checked type="checkbox" id="sianisdemoResearcherCheckbox" value="researcher.csv" onclick="javascript:sianisdemoObstableFilter()" title="Set filter for researcher.csv"></input>
+						- researcher.csv
+					</span>
+					<span class="sianisdemoSubLabel">
+						<input checked type="checkbox" id="sianisdemoVolunteerCheckbox" value="volunteer.csv" onclick="javascript:sianisdemoObstableFilter()" title="Set filter for volunteer.csv"></input>
+						- volunteer.csv
+					</span>
+				</div>
+				<div class="sianisdemoSubLabel" style="clear:both">Filter by camera deployment date interval:
+					<div id="sianisdemoBeginEnd">
+								&#160;&#160;begin date: [&#160;<input id="sianisdemoBeginFrom" type="text" size="8" value="20000101" onchange="javascript:sianisdemoObstableFilter()">
+								&#160;-&#160;<input id="sianisdemoBeginTo" type="text" size="8" value="20991231" onchange="javascript:sianisdemoObstableFilter()">&#160;]
+								<br/>
+								&#160;&#160;&#160;&#160;end date: [&#160;<input id="sianisdemoEndFrom" type="text" size="8" value="20000101" onchange="javascript:sianisdemoObstableFilter()">
+								&#160;-&#160;<input id="sianisdemoEndTo" type="text" size="8" value="20991231" onchange="javascript:sianisdemoObstableFilter()">&#160;]
+					</div>
+				</div>
+				<div id="sianisdemoSelectObservationTables" style="clear:both">
+				  <div style="font-size:90%;">
+				  	<span id="sianisdemoShowGeoDiv" style="">&#160;
+						<input type="button" value="Show" onclick="javascript:sianisdemoShowGeoDiv();" title="Show geographic block">
+					</span>
+					<span id="sianisdemoHideGeoDiv" style="display:none">&#160;
+						<input type="button" value="Hide" onclick="javascript:sianisdemoHideGeoDiv();" title="Hide geographic block">
+					</span>
+					<span class="sianisdemoLabel">
+						- selection on the map:
+					</span>
+				  </div>
+				  <div id="sianisdemoSelectGeo" style="display:none">
+						<span class="sianisdemoSubLabel">- by drawing a bounding box on the map or</span>
+					<br><span class="sianisdemoSubLabel">- by entering coordinates here, then press Enter:</span>
+					<table id="sianisdemoBoundingBoxTable">
+						<tr>
+							<td>north latitude -&gt;</td>
+							<td><input id="sianisdemoNorth" type="text" size="12" onchange="javascript:sianisdemoBBoxChanged();"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><input id="sianisdemoWest" type="text" size="9" onchange="javascript:sianisdemoBBoxChanged();"></td>
+							<td>&lt;west longitude east&gt;</td>
+							<td><input id="sianisdemoEast" type="text" size="9" onchange="javascript:sianisdemoBBoxChanged();"></td>
+						</tr>
+						<tr>
+							<td>south latitude -&gt;</td>
+							<td><input id="sianisdemoSouth" type="text" size="12" onchange="javascript:sianisdemoBBoxChanged();"></td>
+							<td></td>
+						</tr>
+					</table>
+					<div id="sianisdemoButtons">
+						<span style="">
+							<span class="sianisdemoSubLabel" style="float:left">- then click on 
+								<input id="sianisdemoFindButton" type="button" value="Select" onclick="javascript:sianisdemoSelectObstables();" title="select observation tables within box and interval" disabled>
+							</span>
+						</span>
+					</div>
+				  </div>
+				  <div style="font-size:90%;clear:both">
+				  	<span id="sianisdemoShowProjectTree" style="">&#160;
+						<input type="button" value="Show" onclick="javascript:sianisdemoShowProjectTree();" title="Show project/park/site/cameratrap tree structure">
+					</span>
+					<span id="sianisdemoHideProjectTree" style="display:none">&#160;
+						<input type="button" value="Hide" onclick="javascript:sianisdemoHideProjectTree();" title="Hide project/park/site/cameratrap tree structure">
+					</span>
+					<span class="sianisdemoLabel">
+						- selection by project/park/site/cameratrap tree structure:
+					</span>
+				  </div>
+				  <div id="sianisdemoProjectStructureArea" style="display:none"><span> </span></div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="sianisdemoRightColumnArea">
+		<div id="sianisdemoMapArea" style="width:100%; height:400px"><span> </span></div>
+		<div id="sianisdemoAjaxArea" style="display:none"><span> </span></div>
+		<div id="sianisdemoStatusDiv">
+			<span> </span><div id="sianisdemoStatusArea"><span> </span></div>
+		</div>
+		<!-- 
+		<div id="sianisdemoDescriptionArea">
+			<p>This is a demo of the Islandora module Sidora Analysis API, abbreviated sianisdemo.</p>
+			<p>The demo calls the Sidora Analysis API, abbreviated sianis, by REST calls, just as other clients may do.</p>
+			<p>Analyses are performed by workflows, which run on a workflow server,
+				through a module called Generic Workflow, abbreviated gflow.
+			   <a href="/node/6" target="gflow">This module has its own demo interface here</a>.
+			</p>
+			<p>Workflows are constructed with the Taverna Workbench, and run by the Taverna Server.
+	  		, as configured at <a href="/admin/build/block/configure/gflow/0">the Generic Workflow module block</a>.</p>
+      		<p><a href="http://www.taverna.org.uk/" target="taverna">See about Taverna here</a>.</p>
+			<p>Workflows may contain R code, developed and run by the R system.</p>
+		</div>
+	  -->
+	</div>
+	<div id="sianisdemoBottomArea" style="display:none"><span> </span>
+	</div>
+  </div>
+</body>
+</html>
