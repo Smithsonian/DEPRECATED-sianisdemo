@@ -601,9 +601,9 @@ function sianisdemoObstableFilter() {
 			if (beginDateFrom <= cameratrapBeginDate && cameratrapBeginDate <= beginDateTo  && endDateFrom <= cameratrapEndDate  && cameratrapEndDate <= endDateTo) {
 				intervalCheck = true;
 			}
-			if (inputNodeText.indexOf("researcher.csv") > -1) {
+			if (inputNodeText.indexOf("esearcher") > -1) {
 				inputNode.disabled = !researcherCheckboxChecked || !intervalCheck;
-			} else if (inputNodeText.indexOf("volunteer.csv") > -1) {
+			} else if (inputNodeText.indexOf("olunteer") > -1) {
 				inputNode.disabled = !volunteerCheckboxChecked || !intervalCheck;
 			} else {
 				inputNode.disabled = !intervalCheck;
